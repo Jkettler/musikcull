@@ -1,9 +1,14 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :update, :destroy]
 
-  # GET /albums
   def index
-    @albums = Album.select('albums.*, artists.name AS artist').joins(:artists)
+    @albums = Album.with_artists
+
+    render json: @albums
+  end
+
+  def page
+    @albums = Album.with_artists.page(params[:page])
 
     render json: @albums
   end
@@ -38,6 +43,12 @@ class AlbumsController < ApplicationController
     @album.destroy
   end
 
+  def search
+    @results = Album.search(params[:search_term])
+
+    render json: @results
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_album
@@ -46,6 +57,6 @@ class AlbumsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def album_params
-      params.require(:album).permit(:title, :year)
+      params.require(:album).permit(:title, :year, :condition)
     end
 end

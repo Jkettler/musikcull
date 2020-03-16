@@ -38,6 +38,10 @@ class ArtistsController < ApplicationController
     @artist.destroy
   end
 
+  def search
+    @results = Artist.search(params[:search_term])
+    render json: @results
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_artist

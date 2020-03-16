@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
-  resources :artists
-  resources :albums
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  concern :paginatable do
+    get '(page/:page)', action: :page, on: :collection, as: ''
+  end
+
+  resources :artists do
+    collection do
+      get 'search'
+    end
+  end
+
+  resources :albums, concerns: :paginatable do
+    collection do
+      get 'search'
+      get 'page'
+    end
+  end
 end
