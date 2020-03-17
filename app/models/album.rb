@@ -45,10 +45,10 @@ class Album < ApplicationRecord
     def title_frequency
       # If Greg wanted stopwords removed, he should have said so
       Album
-          .pluck(:title)
-          .flat_map{|t| t.split(' ')}
-          .each_with_object(Hash.new(0)){ |value, hash| hash[value] += 1}
-          .sort_by{|_,v| -v[1]}
+        .pluck(:title)
+        .flat_map{|t| t.split(' ')}
+        .each_with_object(Hash.new(0)){ |value, hash| hash[value.capitalize] += 1}
+        .sort_by{|_,v| -v}
     end
   end
 end

@@ -28,10 +28,7 @@ development:
   # The specified database role being used to connect to postgres.
   username: postgres
   host: postgres
-  password:
-
-  # The password associated with the postgres role (username).
-  #password:
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -57,6 +54,9 @@ development:
 test:
   <<: *default
   database: musikcull_test
+  username: postgres
+  host: postgres
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

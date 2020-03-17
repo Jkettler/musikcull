@@ -7,9 +7,8 @@ WORKDIR ${APP_ROOT}
 
 RUN gem install bundler
 
-COPY . .
+COPY Gemfile* ./
 
 RUN bundle install
 
-RUN RAILS_ENV=development bundle exec rails db:migrate
-
+COPY . .

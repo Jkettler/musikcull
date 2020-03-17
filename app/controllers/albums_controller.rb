@@ -27,7 +27,7 @@ class AlbumsController < ApplicationController
     if @album.save
       render json: to_api(@album), status: :created, location: @album
     else
-      render json: to_api(@album).errors, status: :unprocessable_entity
+      render json: @album.errors, status: :unprocessable_entity
     end
   end
 
@@ -36,7 +36,7 @@ class AlbumsController < ApplicationController
     if @album.update_nested_attributes(album_params)
       render json: to_api(@album)
     else
-      render json: to_api(@album).errors, status: :unprocessable_entity
+      render json: @album.errors, status: :unprocessable_entity
     end
   end
 

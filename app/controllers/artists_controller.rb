@@ -20,7 +20,7 @@ class ArtistsController < ApplicationController
     if @artist.save
       render json: to_api(@artist), status: :created, location: @artist
     else
-      render json: to_api(@artist).errors, status: :unprocessable_entity
+      render json: @artist.errors, status: :unprocessable_entity
     end
   end
 
@@ -29,18 +29,18 @@ class ArtistsController < ApplicationController
     if @artist.update(artist_params)
       render json: to_api(@artist)
     else
-      render json: to_api(@artist).errors, status: :unprocessable_entity
+      render json: @artist.errors, status: :unprocessable_entity
     end
-  end
-
-  def page
-    @artists = Artist.page(params[:page])
-    render json: to_api(@artists)
   end
 
   # DELETE /artists/1
   def destroy
     @artist.destroy
+  end
+
+  def page
+    @artists = Artist.page(params[:page])
+    render json: to_api(@artists)
   end
 
   def search

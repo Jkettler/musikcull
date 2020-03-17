@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class AlbumTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test 'should return album word frequency' do
+    assert_equal("Monsters", Album.title_frequency.first.first)
+  end
 end

@@ -1,7 +1,6 @@
 class AlbumSerializer
   include FastJsonapi::ObjectSerializer
-
-  set_type :album  # optional
+  set_type :album
   attributes :id, :title, :year, :condition
   has_many :artists
 

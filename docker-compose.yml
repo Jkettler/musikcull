@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
+    environment:
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     depends_on:
       - "postgres"
     ports:
@@ -15,12 +17,13 @@ services:
       musikcull_net:
 
   postgres:
-    image: postgres:11
+    image: postgres:12
     container_name: postgres-con
     user: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: musikcull_development
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       DATABASE_URL: postgresql://localhost:5432/db
     expose:
       - "5432"

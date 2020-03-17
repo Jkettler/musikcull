@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'faker'
 
 class ArtistsControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -12,7 +13,7 @@ class ArtistsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create artist" do
     assert_difference('Artist.count') do
-      post artists_url, params: { artist: { name: @artist.name } }, as: :json
+      post artists_url, params: { artist: { name: Faker::FunnyName.name } }, as: :json
     end
 
     assert_response 201

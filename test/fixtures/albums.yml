@@ -1,9 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  year: 1
+  id: 1
+  title: Monsters of Rock Volume 1
+  year: 2002
 
 two:
-  title: MyString
-  year: 1
+  id: 2
+  title: Monsters of Monsters Volume 2
+  year: 2003
