@@ -4,7 +4,7 @@ class CreateAlbums < ActiveRecord::Migration[6.0]
       t.string :title, null: false
       t.integer :year
       t.string :condition
-      t.index [:year, :title], unique: true
+      t.index [:year, :title]
       t.timestamps
     end
 

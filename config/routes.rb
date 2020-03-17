@@ -3,9 +3,10 @@ Rails.application.routes.draw do
     get '(page/:page)', action: :page, on: :collection, as: ''
   end
 
-  resources :artists do
+  resources :artists, concerns: :paginatable do
     collection do
       get 'search'
+      get 'page'
     end
   end
 
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
     collection do
       get 'search'
       get 'page'
+      get 'title_frequency'
     end
   end
 end

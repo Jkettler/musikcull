@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_03_14_214502) do
     t.string "condition"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["year", "title"], name: "index_albums_on_year_and_title", unique: true
+    t.index ["year", "title"], name: "index_albums_on_year_and_title"
   end
 
   create_table "albums_artists", id: false, force: :cascade do |t|
