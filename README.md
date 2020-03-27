@@ -152,31 +152,3 @@ Requests to `/albums` or `/artists` return paginated results, except when search
 
 Pages can be traversed by appending `/page/[number]` to the end of the URL, e.g.: `/albums/page/4`.
 
-
- #\# End of README
-  
-### Side notes/Requirements clarifications/questions I would typically ask Greg in the real world:
-1. Do record conditions adhere to some standard/industry grading scale, or does Greg want a text field? (Determines validation strategy)
-2. Regarding pagination, how big should should the page size be? 
-3. Searching and filtering are different things, but the reqs are ambiguous. Should a filter/search query respond with all matches, or just those on the current page? 
-    - If the former, should search results be paginated as well? 
-    - If the latter, wouldn't that be better suited as a frontend task? Why ask the server for less data than you currently already have?
-    - What fields to search on?
-4. Should artist names be unique? What about stopwords (Are 'Beatles' and 'The Beatles' the same artist?)
-5. The project reqs do not mention creating records, only updating them. How to create data? 
-    - One at a time? 
-    - Batches? 
-    - Imported CSV? 
-    - OCR bulk import delayed job from handwritten notes using AWS lambda?? //maybe next sprint
-    
-#### Since Greg wasn't around to ask, I went with the following:
-1. No limitations on what record conditions are. Easier, more flexible
-2. 10, but can be adjusted by modifying `config.default_per_page` value in `config/initializers/kaminari_config.rb` (Note: This configuration is set during initialization, so you must restart the rails server after modifying it. You can restart it with the command: `docker-compose restart backend-con`)
-3. The most straightforward thing. Search album titles and artists names through separate endpoints
-4. For a V1 and since Greg isn't responding to Slack messages (maybe someone should check on him?), I went with a simple uniqueness constraint on artist names only. I thought about unique combined indexes on albums like `[:title, :year]` or `[:title, :condition]` but since the presence of a `condition` field on an album implies an album entry per physical copy, it just didn't make sense to constrain any of those fields.
-5. I added CREATE/DELETE endpoints for both albums and artists, even though they weren't specifically requested. Deleting an artist won't delete associated albums, or vice versa.
-
-
-Thanks, this was fun!
-
-Jimmy
